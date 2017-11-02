@@ -1,23 +1,25 @@
+#!/usr/bin/env python
 # travis-activate.py
 # Dan Wallach <dwallach@rice.edu>
 
 import requests
 import json
 import re
+import subprocess
 
 # see installation and usage instructions in README.md
 
-travisToken = 'YOUR_TOKEN_GOES_HERE'
+travisToken = subprocess.check_output(["git", "config", "--global", "travis.token"]).rstrip()
 
 # and we're going to need the name of your GitHub "project" in which all your
 # students' work lives
 
-githubProject = 'RiceComp215'
+githubProject = 'iesdonana'
 
 # and since there are going to be lots of repos that we don't necessarily care about, let's
 # have a predicate to match the ones we *do* care about
 
-repoRegex = "comp215-.*-2017"
+repoRegex = ".*-.*"
 
 # API documentation: https://developer.travis-ci.org/ 
 # (for the V3 APIs, which are mostly what we're using here)
